@@ -1,4 +1,9 @@
 class ShoutsController < ApplicationController
+  def show
+    @shout = Shout.find(params[:id])
+  end
+
+
   def create
     # to persist our shouts
     shout = current_user.shouts.create(shout_params)
@@ -12,7 +17,7 @@ class ShoutsController < ApplicationController
 
   def redirect_options_for(shout)
     if shout.persisted?
-      { notice: "Shouted!"}
+      { notice: "Shouted!" }
     else
       { alert: "Could not shout" }
     end

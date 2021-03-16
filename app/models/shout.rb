@@ -3,4 +3,9 @@ class Shout < ApplicationRecord
 
   validates :body, presence: true, length: { in: 1..144 }
   validates :user, presence: true
+
+  default_scope { order(created_at: :desc) }
+
+  # provides additional meaning. username comes from user, so we can call it on shouts
+  delegate :username, to: :user
 end
