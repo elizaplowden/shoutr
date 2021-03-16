@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  root to: "homes#show"
+  constraints Clearance::Constraints::SignedIn.new do
+    # user sent to dashboards controller if signed in
+    root to: "dashboards#show", as: :dashboards_root
+  end
+  root to: "homes#show", as: :homes_root
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, only: [:create]
 
